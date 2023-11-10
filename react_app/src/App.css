@@ -1,0 +1,58 @@
+.App {
+  text-align: center;
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(69deg, #6727f8, #e431fa 68%, #fb61a9);
+}
+
+.auth-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5rem;
+  border: 3px solid white;
+  border-radius: 10px;
+  margin: 0.5rem;
+}
+
+.login-form, .register-form{
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-label{
+  text-align: left;
+  color: white;
+  font-weight: bold;
+  font-size: 2.5em;
+  padding: 0.25rem 0;
+}
+
+.auth-input{
+  margin: 0.25rem 0;
+  padding: 1rem;
+  width: 20em;
+  border: none;
+  border-radius: 10px;
+}
+
+.auth-button-login, .auth-button-register{
+  border: none;
+  background-color: #e11f26;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  border-color: black;
+}
+
+.auth-button{
+  border: none;
+  background-color: white;
+  color: #696671;
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
