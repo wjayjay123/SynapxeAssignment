@@ -1,28 +1,28 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
-import { Link } from "react-router-dom";
+import { Button } from "@material-ui/core";
+import { useNavigate } from "react-router-dom";
 
 export const Login = (props) => {
   const [singpassID, setsingpassID] = useState("");
   const [password, setPassword] = useState("");
-  const [loginState, setLoginState] = useState("Fail");
+  const [hide, setHide] = useState(true);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const result = await fetch(
-      `http://localhost:5000/api/users?singpassID=${singpassID}&password=${password}`
+      `http://localhost:5000/api/users?singpassID=${singpassID}&password=${password}`,
+      {
+        method: "GET",
+      }
     );
     const jsonResult = await result.json();
     if (jsonResult.length > 0) {
-      setLoginState("Success");
+      console.log(jsonResult);
+      navigate("/Home");
     } else {
-      setLoginState("Fail");
-    }
-    console.log(jsonResult);
-    if (loginState === "Success") {
-      console.log("Success");
-    } else {
-      console.log("Fail");
+      setHide(false);
     }
   };
 
@@ -30,23 +30,22 @@ export const Login = (props) => {
     <>
       <div className="App">
         <div className="auth-form-container">
-          <img className="logo" src={require("../icons/medical.png")} alt="" />
-          <h2>HealthAssist</h2>
           <form className="login-form" onSubmit={handleSubmit}>
             <label className="auth-label">Log in</label>
             <TextField
               className="auth-inputfield"
-              id="standard-required"
+              required
               label="Singpass ID"
               defaultValue=""
               variant="outlined"
               value={singpassID}
               onChange={(e) => setsingpassID(e.target.value)}
               autoComplete="off"
+              style={{ margin: "0.5rem" }}
             />
             <TextField
               className="auth-inputfield"
-              id="standard-required"
+              required
               label="Password"
               type="password"
               defaultValue=""
@@ -54,16 +53,41 @@ export const Login = (props) => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="off"
+              style={{ margin: "0.5rem" }}
             />
-            <button className="auth-button-login">Log in</button>
-            <button className="auth-button">
-              <Link
-                to={"/Register"}
-                style={{ textDecoration: "None", color: "white" }}
-              >
-                Register an account
-              </Link>
-            </button>
+            {hide ? null : (
+              <a className="auth-errormsg">
+                Incorrect ID or password, please try again.
+              </a>
+            )}
+            <Button
+              variant="contained"
+              type="submit"
+              style={{
+                backgroundColor: "#e11f26",
+                color: "white",
+                fontWeight: "bold",
+                padding: "15px",
+                borderRadius: "10px",
+                margin: "0.5rem",
+              }}
+            >
+              Log In
+            </Button>
+            <Button
+              onClick={() => navigate("/Register")}
+              variant="contained"
+              style={{
+                backgroundColor: "#afaea5",
+                color: "white",
+                fontWeight: "bold",
+                padding: "15px",
+                borderRadius: "10px",
+                margin: "0.5rem",
+              }}
+            >
+              Register an account
+            </Button>
           </form>
         </div>
       </div>

@@ -4,6 +4,7 @@ const cors = require('cors');
 
 const app = express()
 app.use(cors())
+app.use(express.json())
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -14,12 +15,21 @@ const db = mysql.createConnection({
 })
 
 app.get('/api/users', (req, res)=>{
-    const params = req.query
+    const params = req.query;
     const query = `SELECT * FROM users WHERE singpass_id='${params.singpassID}'and password='${params.password}'`;
     db.query(query,(err,data)=>{
         if(err) return res.json(err);
         return res.json(data)
     })
+})
+
+app.post('/api/users', (req, res)=>{
+    const params = req.body;
+    const query = `INSERT INTO users (name, singpass_id, password) VALUES ('${params.name}', '${params.nric}', '${params.password}')`;
+    db.query(query,(err,data)=>{
+        if(err) return res.json(err);
+    })
+    return res.json("User registered successfully")
 })
 
 app.listen(5000, ()=>{
