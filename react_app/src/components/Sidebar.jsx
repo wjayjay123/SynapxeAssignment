@@ -91,6 +91,7 @@ export default function Sidebar(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
+  const userData = props.userData;
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -101,7 +102,7 @@ export default function Sidebar(props) {
   };
 
   const handleHome = () => {
-    navigate("/Home");
+    navigate("/Home", { state: { userData } });
   };
 
   const handleLogOut = () => {
@@ -135,14 +136,12 @@ export default function Sidebar(props) {
             alt="logo"
             style={{ marginRight: "0.5rem" }}
           />
-          <Typography variant="h6" noWrap>
-            HealthAssist
-          </Typography>
+          <Typography variant="h6">HealthAssist</Typography>
           <ListItem style={{ justifyContent: "right" }}>
             <AccountCircleIcon
               style={{ fontSize: "40px", marginRight: "0.5rem" }}
             />
-            <Typography>{props.userName}</Typography>
+            <Typography>{userData.name}</Typography>
           </ListItem>
         </Toolbar>
       </AppBar>

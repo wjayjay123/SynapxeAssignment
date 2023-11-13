@@ -32,6 +32,15 @@ app.post('/api/users', (req, res)=>{
     return res.json("User registered successfully")
 })
 
+app.get('/api/patients', (req, res)=>{
+    const params = req.query;
+    const query = `SELECT * FROM patients where caretaker_id='${params.singpassID}'`
+    db.query(query,(err,data)=>{
+        if(err) return res.json(err);
+        return res.json(data)
+    })
+})
+
 app.listen(5000, ()=>{
     console.log("Server running on port 5000")
 })
