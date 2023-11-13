@@ -68,6 +68,15 @@ app.get('/api/appointments', (req, res)=>{
     })
 })
 
+app.post('/api/appointments', (req, res)=>{
+    const params = req.body;
+    const query = `INSERT INTO appointments (patient_name, singpass_id, appointment_date, appointment_time, doctor_name) VALUES ('${params.name}', '${params.singpass_id}', '${params.date}', '${params.time}','${params.doctor}')`;
+    db.query(query,(err,data)=>{
+        if(err) return res.json(err);
+    })
+    return res.json("Appointment booked successfully")
+})
+
 app.delete('/api/appointments', (req, res)=>{
     const params = req.body;
     const query = `DELETE FROM appointments where singpass_id='${params.singpass_id}' and appointment_date='${params.appointment_date}'`

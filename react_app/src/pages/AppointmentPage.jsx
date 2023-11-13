@@ -8,6 +8,13 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "@mui/material";
+import "date-fns";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from "@material-ui/pickers";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -28,6 +35,16 @@ export const AppointmentPage = () => {
   const [appointmentData, setAppointmentData] = useState([]);
   const [selectedAppointment, setselectedAppointment] = useState("");
   const [bookingState, setBookingState] = useState(true);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedTime, setSelectedTime] = useState(new Date());
+  const [selectedDoctor, setSelectedDoctor] = useState("");
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+  const handleTimeChange = (date) => {
+    setSelectedTime(date);
+  };
 
   const handleFetchPatients = async (e) => {
     const result = await fetch(
@@ -67,10 +84,42 @@ export const AppointmentPage = () => {
       setSelectedPatient("");
       setselectedAppointment("");
     }
+    if (bookingState && selectedDate && selectedTime) {
+      let patient = patientData.find((element) => {
+        return element.singpass_id === selectedPatient;
+      });
+      let name = patient.patient_name;
+      let date = selectedDate.toLocaleDateString();
+      let time = selectedTime.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      const result = await fetch(`http://localhost:5000/api/appointments`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name,
+          singpass_id: selectedPatient,
+          date: date,
+          time: time,
+          doctor: selectedDoctor,
+        }),
+      });
+      const jsonResult = await result.json();
+      console.log(jsonResult);
+      setSelectedPatient("");
+      setSelectedDate(new Date());
+      setSelectedTime(new Date());
+      setSelectedDoctor("");
+    }
   };
 
   const handleChangePatient = (event) => {
     setSelectedPatient(event.target.value);
+  };
+
+  const handleChangeDoctor = (event) => {
+    setSelectedDoctor(event.target.value);
   };
 
   const handleChangeAppointment = (event) => {
@@ -114,6 +163,34 @@ export const AppointmentPage = () => {
               ))}
             </Select>
           </FormControl>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            {selectedPatient && bookingState ? (
+              <KeyboardDatePicker
+                disableToolbar
+                variant="inline"
+                format="MM/dd/yyyy"
+                margin="normal"
+                label="Date picker inline"
+                value={selectedDate}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  "aria-label": "change date",
+                }}
+              />
+            ) : null}
+            {selectedPatient && bookingState ? (
+              <KeyboardTimePicker
+                margin="normal"
+                id="time-picker"
+                label="Time picker"
+                value={selectedTime}
+                onChange={handleTimeChange}
+                KeyboardButtonProps={{
+                  "aria-label": "change time",
+                }}
+              />
+            ) : null}
+          </MuiPickersUtilsProvider>
           {selectedPatient && !bookingState ? (
             <FormControl
               required
@@ -133,6 +210,19 @@ export const AppointmentPage = () => {
                     {appointment.appointment_date}
                   </MenuItem>
                 ))}
+              </Select>
+            </FormControl>
+          ) : null}
+          {selectedPatient && bookingState ? (
+            <FormControl
+              required
+              className={classes.formControl}
+              style={{ width: "300px" }}
+            >
+              <InputLabel>Select Doctor</InputLabel>
+              <Select value={selectedDoctor} onChange={handleChangeDoctor}>
+                <MenuItem value={"Dr. Gerald Neo"}>{"Dr. Gerald Neo"}</MenuItem>
+                <MenuItem value={"Dr. Marcus Ang"}>{"Dr. Marcus Ang"}</MenuItem>
               </Select>
             </FormControl>
           ) : null}
