@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button, Typography } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 
 export const Register = (props) => {
@@ -84,9 +84,11 @@ export const Register = (props) => {
               style={{ margin: "0.5rem" }}
             />
             {passwordCheck ? null : (
-              <a className="auth-errormsg">
+              <Typography
+                style={{ color: "red", fontSize: "small", textAlign: "center" }}
+              >
                 Password does not match. Please try again.
-              </a>
+              </Typography>
             )}
             <Button
               variant="contained"

@@ -16,9 +16,10 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import MedicationIcon from "@mui/icons-material/Medication";
-import GroupsIcon from "@mui/icons-material/Groups";
 import EventIcon from "@mui/icons-material/Event";
 import LogoutIcon from "@mui/icons-material/Logout";
+import HomeIcon from "@mui/icons-material/Home";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -85,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Sidebar() {
+export default function Sidebar(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -97,6 +98,10 @@ export default function Sidebar() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleHome = () => {
+    navigate("/Home");
   };
 
   const handleLogOut = () => {
@@ -124,10 +129,21 @@ export default function Sidebar() {
           >
             <MenuIcon />
           </IconButton>
-          <img width="40px" src={require("../icons/medical.png")} />
+          <img
+            width="40px"
+            src={require("../icons/medical.png")}
+            alt="logo"
+            style={{ marginRight: "0.5rem" }}
+          />
           <Typography variant="h6" noWrap>
             HealthAssist
           </Typography>
+          <ListItem style={{ justifyContent: "right" }}>
+            <AccountCircleIcon
+              style={{ fontSize: "40px", marginRight: "0.5rem" }}
+            />
+            <Typography>{props.userName}</Typography>
+          </ListItem>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -154,14 +170,11 @@ export default function Sidebar() {
         </div>
         <Divider />
         <List>
-          <ListItem button>
+          <ListItem button onClick={handleHome}>
             <ListItemIcon>
-              <GroupsIcon />
+              <HomeIcon />
             </ListItemIcon>
-            <ListItemText>
-              Manage <br />
-              Patients
-            </ListItemText>
+            <ListItemText>Home</ListItemText>
           </ListItem>
           <ListItem button>
             <ListItemIcon>
@@ -177,7 +190,7 @@ export default function Sidebar() {
               <EventIcon />
             </ListItemIcon>
             <ListItemText>
-              Book <br />
+              Manage <br />
               Appointments
             </ListItemText>
           </ListItem>

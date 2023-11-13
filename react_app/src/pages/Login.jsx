@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "@material-ui/core/TextField";
-import { Button } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import { useNavigate } from "react-router-dom";
 
 export const Login = (props) => {
   const [singpassID, setsingpassID] = useState("");
   const [password, setPassword] = useState("");
   const [hide, setHide] = useState(true);
+  const [userData, setUserData] = useState([]);
+  const [login, setLogin] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -19,12 +21,19 @@ export const Login = (props) => {
     );
     const jsonResult = await result.json();
     if (jsonResult.length > 0) {
-      console.log(jsonResult);
-      navigate("/Home");
+      setUserData(jsonResult[0]);
+      setHide(true);
+      setLogin(true);
     } else {
       setHide(false);
     }
   };
+
+  useEffect(() => {
+    if (login === true) {
+      navigate("/Home", { state: { userData } });
+    }
+  }, [login, navigate, userData]);
 
   return (
     <>
@@ -56,9 +65,11 @@ export const Login = (props) => {
               style={{ margin: "0.5rem" }}
             />
             {hide ? null : (
-              <a className="auth-errormsg">
+              <Typography
+                style={{ color: "red", fontSize: "small", textAlign: "center" }}
+              >
                 Incorrect ID or password, please try again.
-              </a>
+              </Typography>
             )}
             <Button
               variant="contained"
