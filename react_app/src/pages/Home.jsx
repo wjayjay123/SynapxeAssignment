@@ -37,7 +37,7 @@ export const Home = () => {
       >
         {patientData.map((patient) => {
           console.log(patient);
-          return <PatientCard patientData={patient} />;
+          return <PatientCard patientData={patient} userData={userData} />;
         })}
       </Grid>
     </div>
