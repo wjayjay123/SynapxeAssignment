@@ -1,0 +1,5 @@
+patient_id,singpass_id,patient_name,patient_age,patient_gender,patient_address,caretaker_id,prescriptions_status,appointment_status
+1,S1231231C,Tan Lai Meng,86,M,"492 Jurong West Street 41 #01-66, Singapore 640492",S1234567A,0,1
+2,S4564561C,Pravin Thevar s/o R. Kumar,79,M,"2 Jurong East Street 21, #04-13 Singapore 609601",S1234567A,1,1
+3,S7897891C,Poh See Hui,82,F,"363 Bukit Batok Street 31, #12-123 Singapore 650363",S1234567A,1,1
+4,S0120121C,Siti Aisha Binte Mohd Rohan,75,F,"16 Teck Whye Lane, #08-211 Singapore 680016",S1234567A,0,0

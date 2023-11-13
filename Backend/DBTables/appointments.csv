@@ -1,0 +1,10 @@
+appointment_id,patient_name,singpass_id,appointment_date,appointment_time,doctor_name
+1,Pravin Thevar s/o R. Kumar,S4564561C,20/11/2023,01:00pm,Dr. Gerald Neo
+2,Poh See Hui,S7897891C,15/01/2024,03:00pm,Dr. Marcus Ang
+6,Tan Lai Meng,S1231231C,12/03/2024,10:00am,Dr. Gerald Neo
+7,Tan Lai Meng,S1231231C,10/06/2024,10:00am,Dr. Gerald Neo
+8,Poh See Hui,S7897891C,20/04/2024,03:00pm,Dr. Marcus Ang
+9,Poh See Hui,S7897891C,10/07/2024,10:00am,Dr. Marcus Ang
+10,Pravin Thevar s/o R. Kumar,S4564561C,20/02/2024,01:00pm,Dr. Gerald Neo
+11,Pravin Thevar s/o R. Kumar,S4564561C,28/05/2024,03:00pm,Dr. Gerald Neo
+13,Tan Lai Meng,S1231231C,12/12/2023,12:00pm,Dr. Gerald Neo

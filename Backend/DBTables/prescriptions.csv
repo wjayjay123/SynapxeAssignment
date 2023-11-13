@@ -1,0 +1,9 @@
+prescription_id,patient_name,singpass_id,prescription_name,prescription_amount,prescription_current_amount,doctor_name
+1,Tan Lai Meng,S1231231C,Metformin,160,100,Dr. Gerald Neo
+2,Tan Lai Meng,S1231231C,Lisinopril,240,180,Dr. Gerald Neo
+4,Tan Lai Meng,S1231231C,Omeprazole,120,20,Dr. Gerald Neo
+5,Pravin Thevar s/o R. Kumar,S4564561C,Simvastatin,160,100,Dr. Gerald Neo
+6,Pravin Thevar s/o R. Kumar,S4564561C,Azithromycin,180,150,Dr. Gerald Neo
+7,Poh See Hui,S7897891C,Simvastatin,160,80,Dr. Marcus Ang
+8,Poh See Hui,S7897891C,Lisinopril,240,200,Dr. Marcus Ang
+9,Siti Aisha Binte Mohd Rohan,S0120121C,Metformin,160,35,Dr. Marcus Ang
