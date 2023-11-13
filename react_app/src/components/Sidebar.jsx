@@ -109,6 +109,10 @@ export default function Sidebar(props) {
     navigate("/Prescription", { state: { userData } });
   };
 
+  const handleAppointment = () => {
+    navigate("/Appointment", { state: { userData } });
+  };
+
   const handleLogOut = () => {
     navigate("/");
   };
@@ -188,7 +192,7 @@ export default function Sidebar(props) {
               Prescriptions
             </ListItemText>
           </ListItem>
-          <ListItem button>
+          <ListItem button onClick={handleAppointment}>
             <ListItemIcon>
               <EventIcon />
             </ListItemIcon>
