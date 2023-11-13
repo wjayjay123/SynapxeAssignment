@@ -41,14 +41,42 @@ export default function PatientCard(props) {
           <Typography gutterBottom variant="h6" component="h2">
             {patientData.patient_name}
           </Typography>
-          {/* <Typography variant="body2" color="textSecondary" component="p">
-            Age: {patientData.patient_age} <br />
-            Gender: {patientData.patient_gender === "M"
-              ? "Male"
-              : "Female"}{" "}
-            <br />
-            Address: {patientData.patient_address}
-          </Typography> */}
+          <Typography>
+            Prescription Amount: <br />
+            {patientData.prescriptions_status === 1 ? (
+              <Button
+                variant="disabled"
+                style={{ color: "white", backgroundColor: "green" }}
+              >
+                High
+              </Button>
+            ) : (
+              <Button
+                variant="disabled"
+                style={{ color: "white", backgroundColor: "red" }}
+              >
+                Low
+              </Button>
+            )}
+          </Typography>
+          <Typography>
+            Appointment Status: <br />
+            {patientData.appointment_status === 1 ? (
+              <Button
+                variant="disabled"
+                style={{ color: "white", backgroundColor: "green" }}
+              >
+                Booked
+              </Button>
+            ) : (
+              <Button
+                variant="disabled"
+                style={{ color: "white", backgroundColor: "red" }}
+              >
+                Not Booked
+              </Button>
+            )}
+          </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions style={{ justifyContent: "center" }}>

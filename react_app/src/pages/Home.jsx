@@ -36,7 +36,6 @@ export const Home = () => {
         style={{ alignContent: "center" }}
       >
         {patientData.map((patient) => {
-          console.log(patient);
           return <PatientCard patientData={patient} userData={userData} />;
         })}
       </Grid>

@@ -41,6 +41,15 @@ app.get('/api/patients', (req, res)=>{
     })
 })
 
+app.get('/api/prescriptions', (req, res)=>{
+    const params = req.query;
+    const query = `SELECT * FROM prescriptions where singpass_id='${params.singpassID}'`
+    db.query(query,(err,data)=>{
+        if(err) return res.json(err);
+        return res.json(data)
+    })
+})
+
 app.listen(5000, ()=>{
     console.log("Server running on port 5000")
 })
