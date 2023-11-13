@@ -50,6 +50,16 @@ app.get('/api/prescriptions', (req, res)=>{
     })
 })
 
+app.put('/api/prescriptions', (req, res)=>{
+    const params = req.body;
+    const query = `UPDATE prescriptions SET prescription_current_amount=prescription_current_amount+${params.amount} WHERE singpass_id='${params.singpass_id}' and prescription_name='${params.prescription}'`;
+    console.log(query)
+    db.query(query,(err,data)=>{
+        if(err) return res.json(err);
+    })
+    return res.json("Prescription ordered successfully")
+})
+
 app.get('/api/appointments', (req, res)=>{
     const params = req.query;
     const query = `SELECT * FROM appointments where singpass_id='${params.singpassID}'`

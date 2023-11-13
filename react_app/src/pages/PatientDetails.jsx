@@ -1,14 +1,12 @@
-import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
-import { Tab, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useEffect, useState } from "react";
 import PrescriptionTable from "../components/PrescriptionTable";
 import AppointmentTable from "../components/AppointmentTable";
 
 export const PatientDetails = (props) => {
-  const params = useParams();
   const location = useLocation();
   const patientData = location.state.patientData;
   const userData = location.state.userData;

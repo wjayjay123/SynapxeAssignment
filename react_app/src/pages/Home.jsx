@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import { useLocation } from "react-router-dom";
 import PatientCard from "../components/PatientCard";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 export const Home = () => {
   const location = useLocation();
