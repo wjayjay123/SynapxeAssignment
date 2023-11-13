@@ -5,6 +5,7 @@ import { Tab, Typography } from "@material-ui/core";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useEffect, useState } from "react";
 import PrescriptionTable from "../components/PrescriptionTable";
+import AppointmentTable from "../components/AppointmentTable";
 
 export const PatientDetails = (props) => {
   const params = useParams();
@@ -12,6 +13,7 @@ export const PatientDetails = (props) => {
   const patientData = location.state.patientData;
   const userData = location.state.userData;
   const [prescriptionData, setPrescriptionData] = useState([]);
+  const [appointmentData, setAppointmentData] = useState([]);
 
   const handlePrescriptions = async (e) => {
     const result = await fetch(
@@ -24,8 +26,20 @@ export const PatientDetails = (props) => {
     setPrescriptionData(jsonResult);
   };
 
+  const handleAppointments = async (e) => {
+    const result = await fetch(
+      `http://localhost:5000/api/appointments?singpassID=${patientData.singpass_id}`,
+      {
+        method: "GET",
+      }
+    );
+    const jsonResult = await result.json();
+    setAppointmentData(jsonResult);
+  };
+
   useEffect(() => {
     handlePrescriptions();
+    handleAppointments();
   }, []);
 
   return (
@@ -36,7 +50,7 @@ export const PatientDetails = (props) => {
         <Typography gutterBottom variant="h6" component="h2">
           {patientData.patient_name}
         </Typography>
-        <Typography variant="body1" color="textSecondary" component="p">
+        <Typography variant="body1" color="black" component="p">
           Age: {patientData.patient_age} <br />
           Gender: {patientData.patient_gender === "M" ? "Male" : "Female"}{" "}
           <br />
@@ -54,6 +68,7 @@ export const PatientDetails = (props) => {
         <Typography gutterBottom variant="h6" component="h2">
           Appointments
         </Typography>
+        <AppointmentTable appointmentData={appointmentData} />
       </div>
     </div>
   );
